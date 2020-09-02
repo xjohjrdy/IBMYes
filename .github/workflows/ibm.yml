@@ -18,26 +18,17 @@ jobs:
     - name: Init
       run: |
         chmod -R 777 ./IBM_Cloud_CLI/
-    - name: Login IBM Cloud
+    - name: IBM Cloud CF Restart1
       env:
-        IBM_ACCOUNT: ${{ secrets.IBM_ACCOUNT }}
-        REGION_NUM: ${{ secrets.REGION_NUM }}
+        IBM_ACCOUNT_USER1: ${{ secrets.IBM_ACCOUNT_USER1 }}
+        IBM_ACCOUNT_PASS1: ${{ secrets.IBM_ACCOUNT_PASS1 }}
+        RESOURSE_ID1: ${{ secrets.RESOURSE_ID1 }}
+        IBM_APP_NAME1: ${{ secrets.IBM_APP_NAME1 }}
       run: |
-        ./IBM_Cloud_CLI/ibmcloud login <<EOF
-        $IBM_ACCOUNT
-        $REGION_NUM
-        no
-        EOF
-    - name: Target IBM Cloud
-      env:
-        RESOURSE_ID: ${{ secrets.RESOURSE_ID }}
-      run: |
-        ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID"
+        ./IBM_Cloud_CLI/ibmcloud login -u $IBM_ACCOUNT_USER1 -p $IBM_ACCOUNT_PASS1 -r us-south -g $RESOURSE_ID1 2>/dev/null
         ./IBM_Cloud_CLI/ibmcloud target --cf
         ./IBM_Cloud_CLI/ibmcloud cf install
-    - name: Restart IBM Cloud
-      env:
-        IBM_APP_NAME: ${{ secrets.IBM_APP_NAME }}
-      run: |
-        ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME"
-
+        ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME1"
+        ./IBM_Cloud_CLI/ibmcloud logout ;
+        
+    
