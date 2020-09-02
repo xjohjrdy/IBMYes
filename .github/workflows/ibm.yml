@@ -30,5 +30,16 @@ jobs:
         ./IBM_Cloud_CLI/ibmcloud cf install -v 6.5.1 -f
         ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME1"
         ./IBM_Cloud_CLI/ibmcloud logout ;
+    - name: IBM Cloud CF Restart2
+      env:
+        IBM_ACCOUNT_USER2: ${{ secrets.IBM_ACCOUNT_USER2 }}
+        IBM_ACCOUNT_PASS2: ${{ secrets.IBM_ACCOUNT_PASS2 }}
+        RESOURSE_ID2: ${{ secrets.RESOURSE_ID2 }}
+        IBM_APP_NAME2: ${{ secrets.IBM_APP_NAME2 }}
+      run: |
+        ./IBM_Cloud_CLI/ibmcloud login -u $IBM_ACCOUNT_USER2 -p $IBM_ACCOUNT_PASS2 -r us-south -g $RESOURSE_ID2 2>/dev/null
+        ./IBM_Cloud_CLI/ibmcloud target --cf
+        ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME2"
+        ./IBM_Cloud_CLI/ibmcloud logout ;
         
     
