@@ -27,7 +27,7 @@ jobs:
       run: |
         ./IBM_Cloud_CLI/ibmcloud login -u $IBM_ACCOUNT_USER1 -p $IBM_ACCOUNT_PASS1 -r us-south -g $RESOURSE_ID1 2>/dev/null
         ./IBM_Cloud_CLI/ibmcloud target --cf
-        ./IBM_Cloud_CLI/ibmcloud cf install
+        ./IBM_Cloud_CLI/ibmcloud cf install -v 6.5.1 -f
         ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME1"
         ./IBM_Cloud_CLI/ibmcloud logout ;
         
